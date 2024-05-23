@@ -60,7 +60,8 @@
     margin-bottom: 2rem;
   }
   
-  .hero button {
+  .hero a {
+    text-decoration: none;
     background-color: #3F51B5;
     color: #fff;
     border: none;
