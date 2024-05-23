@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepWork AI - Pomodoro Timer</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #timer {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    #controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    button {
+      background-color: #3F51B5;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">25:00</div>
+  <div id="controls">
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+  </div>
+
+  <script>
+    // Pomodoro Timer
+    const pomodoroTimer = {
+      workDuration: 25 * 60, // 25 minutes in seconds
+      breakDuration: 5 * 60, // 5 minutes in seconds
+      isRunning: false,
+      timeRemaining: null,
+      interval: null,
+
+      init() {
+        this.updateTimerDisplay();
+        this.attachEventListeners();
+      },
+
+      updateTimerDisplay() {
+        const minutes = Math.floor(this.timeRemaining / 60);
+        const seconds = this.timeRemaining % 60;
+        const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('timer').textContent = formattedTime;
+      },
+
+      startTimer() {
+        if (!this.isRunning) {
+          this.isRunning = true;
+          this.timeRemaining = this.workDuration;
+          this.interval = setInterval(() => {
+            this.timeRemaining--;
+            this.updateTimerDisplay();
+            if (this.timeRemaining === 0) {
+              this.toggleBreak();
+            }
+          }, 1000);
+        }
+      },
+
+      stopTimer() {
+        this.isRunning = false;
+        clearInterval(this.interval);
+      },
+
+      toggleBreak() {
+        if (this.timeRemaining === 0) {
+          this.timeRemaining = this.breakDuration;
+          // Add notification or sound for break time
+        } else {
+          this.timeRemaining = this.workDuration;
+        }
+      },
+
+      attachEventListeners() {
+        document.getElementById('start').addEventListener('click', () => {
+          this.startTimer();
+        });
+
+        document.getElementById('stop').addEventListener('click', () => {
+          this.stopTimer();
+        });
+      }
+    };
+
+    pomodoroTimer.init();
+  </script>
+</body>
+</html>

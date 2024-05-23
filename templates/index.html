@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepWork AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
+  <style>
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 30%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">DeepWork AI</div>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Features </a></li>
+        <li><a href="pomodoro.html"> Pomodoro Timer</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Unlock Your Productivity Potential</h1>
+      <p>DeepWork AI is an AI-powered productivity app that helps you stay focused and achieve your goals.</p>
+      <button>Start Now For Free</button>
+      
+      <li><a href="get started.html"> Sign Up Now</a></li>
+    </section>
+
+    <section class="features">
+      <h2>Key Features</h2>
+      <ul>
+        <li>
+          <h3>Personalized Work Schedule</h3>
+          <p>AI-powered scheduling and task prioritization to optimize your time.</p>
+        </li>
+        <li>
+          <h3>Distraction Management</h3>
+          <p>Block distracting websites and apps during deep work sessions.</p>
+        </li>
+        <li>
+          <h3>Work Session Optimization</h3>
+          <p>Customizable Pomodoro timers and break suggestions.</p>
+        </li>
+        <li>
+          <h3>Performance Analytics</h3>
+          <p>Detailed productivity reports and focus metrics.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="pricing">
+      <h2>Pricing Plans</h2>
+      <div class="plan-cards">
+        <div class="plan-card">
+          <h3>Basic</h3>
+          <p class="price">$9.99/month</p>
+          <ul>
+            <li>Personalized Work Schedule</li>
+            <li>Distraction Management</li>
+          </ul>
+          <button>Get Started</button>
+        </div>
+        <div class="plan-card">
+          <h3>Pro</h3>
+          <p class="price">$19.99/month</p>
+          <ul>
+            <li>Personalized Work Schedule</li>
+            <li>Distraction Management</li>
+            <li>Work Session Optimization</li>
+            <li>Performance Analytics</li>
+          </ul>
+          <button>Get Started</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>Get in Touch</h2>
+      <form>
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; DeepWork AI</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
