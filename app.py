@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 # Set the directory for storing data
-DATA_DIR = r'C:\Users\draco\OneDrive\Desktop\DeepWork AI\data'
+DATA_DIR = r'/Users/rayhanmohammad/Desktop/rishiravi/C:\Users\draco\OneDrive\Desktop\DeepWork AI\data'
 
 # Create the data directory if it doesn't exist
 if not os.path.exists(DATA_DIR):
@@ -13,7 +13,7 @@ if not os.path.exists(DATA_DIR):
 @app.route('/')
 def index():
     files = os.listdir(DATA_DIR)
-    return render_template('index.html', files=files)
+    return render_template('/Users/rayhanmohammad/Desktop/rishiravi/templates/index.html', files=files)
 
 @app.route('/view/<filename>')
 def view_file(filename):
