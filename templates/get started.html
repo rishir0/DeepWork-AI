@@ -7,17 +7,16 @@
   <link rel="stylesheet" href="styles.css">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
-  <style>
-    /* Add your custom styles here */
-  </style>
 </head>
 <body>
   <header>
     <nav>
-      <div class="logo">DeepWork AI</div>
+      <div class="logo"><a href="index.html">DeepWork AI</a></div>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <!-- Add other navigation links as needed -->
+        <li><a href="features.html">Features</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -30,17 +29,21 @@
           <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
         <div class="or-separator">
-          <span>OR</span>
+          <span>or</span>
         </div>
         <form id="signup-form">
           <input type="text" id="username" placeholder="Username" required>
+          <input type="email" id="email" placeholder="Email" required>
           <input type="password" id="password" placeholder="Password" required>
           <button type="submit">Sign Up</button>
           <a href="#" id="forgot-password">Forgot Password?</a>
         </form>
         <div class="login-link">
-          Already have an account? <a href="#" id="login-link">Login</a>
-        </div>
+          Already have an account? <a href="login.html" id="login-link">Login</a>
+        </div> class="input">
+        <button id="google-login-btn" class="google-button">
+            <i class="fab fa-google"></i> Login with Google
+        </button>
       </div>
     </section>
   </main>
@@ -52,8 +55,7 @@
   <script>
     // Google Sign-In
     function onSignIn(googleUser) {
-      // Handle Google Sign-In
-      var profile = googleUser.getBasicProfile();
+      const profile = googleUser.getBasicProfile();
       console.log('Google Sign-In successful:', profile.getName());
       // Add your sign-in logic here
     }
@@ -63,9 +65,10 @@
     signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       // Add your sign-up logic here
-      console.log('Sign-Up successful:', username, password);
+      console.log('Sign-Up successful:', username, email, password);
     });
 
     // Forgot Password
@@ -80,8 +83,8 @@
     const loginLink = document.getElementById('login-link');
     loginLink.addEventListener('click', (e) => {
       e.preventDefault();
-      // Add your login logic here
-      console.log('Login clicked');
+      // Redirect to the login page
+      window.location.href = 'login.html';
     });
   </script>
 </body>
