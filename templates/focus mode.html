@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producify AI - Focus Mode</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .section .edit-btn {
+      background-color: #ff9800; /* Orange */
+      color: #ffffff;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .section .edit-btn:hover {
+      filter: brightness(1.2);
+    }
+
+    #timer {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    #controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      color: #ffffff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    #start-stop {
+      background-color: #4CAF50; /* Green */
+    }
+
+    #pause {
+      background-color: #f44336; /* Red */
+    }
+
+    #restart {
+      background-color: #ff9800; /* Orange */
+    }
+
+    button:hover {
+      filter: brightness(1.2);
+    }
+
+    #quote {
+      margin-top: 2rem;
+      font-style: italic;
+      font-size: 1.2rem;
+    }
+
+    .edit-section {
+      display: none;
+      margin-top: 1rem;
+      text-align: left;
+    }
+
+    .edit-section label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .edit-section input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .edit-section button {
+      background-color: #5c6bc0;
+    }
+
+    .edit-section button:hover {
+      background-color: #2c3e91;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo"><a href="index.html">Producify AI</a></div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2>Pomodoro Timer</h2>
+      <p>Stay focused and productive with our Pomodoro Timer.</p>
+      <div id="timer">25:00</div>
+      <div id="controls">
+        <button id="start-stop">Start</button>
+        <button id="pause">Pause</button>
+        <button id="restart" style="display: none;">Restart</button>
+      </div>
+    </section>
+
+    <section class="section" id="work-focus-section">
+      <h2>Work Focus</h2>
+      <p>Mutes notifications and blocks distracting websites and apps during work sessions.</p>
+      <button class="edit-btn" onclick="toggleEditSection('work-focus')">Edit</button>
+      <div class="edit-section" id="edit-work-focus">
+        <label for="work-block-list">Block List (Comma Separated URLs):</label>
+        <input type="text" id="work-block-list" value="facebook.com, twitter.com, youtube.com">
+        <button onclick="saveEdit('work-focus')">Save</button>
+      </div>
+    </section>
+
+    <section class="section" id="personal-focus-section">
+      <h2>Personal Focus</h2>
+      <p>Customizable focus mode for personal tasks and activities.</p>
+      <button class="edit-btn" onclick="toggleEditSection('personal-focus')">Edit</button>
+      <div class="edit-section" id="edit-personal-focus">
+        <label for="personal-block-list">Block List (Comma Separated URLs):</label>
+        <input type="text" id="personal-block-list" value="netflix.com, hulu.com">
+        <button onclick="saveEdit('personal-focus')">Save</button>
+      </div>
+    </section>
+
+    <section class="section" id="dnd-focus-section">
+      <h2>Do Not Disturb</h2>
+      <p>Disables all notifications and distractions for uninterrupted focus.</p>
+      <button class="edit-btn" onclick="toggleEditSection('dnd-focus')">Edit</button>
+      <div class="edit-section" id="edit-dnd-focus">
+        <label for="dnd-settings">DND Settings:</label>
+        <input type="text" id="dnd-settings" value="Disable all notifications">
+        <button onclick="saveEdit('dnd-focus')">Save</button>
+      </div>
+    </section>
+
+    <div id="quote"></div>
+  </main>
+
+  <footer>
+    <p>&copy; Producify AI</p>
+  </footer>
+
+  <script>
+    const quotes = [
+      "Focus on being productive instead of busy.",
+      "Your future is created by what you do today, not tomorrow.",
+      "It's not always that we need to do more but rather that we need to focus on less.",
+      "Success is the sum of small efforts, repeated day in and day out.",
+      "The key to success is to focus our conscious mind on things we desire not things we fear."
+    ];
+
+    const showRandomQuote = () => {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById('quote').textContent = quotes[randomIndex];
+    };
+
+    const toggleEditSection = (sectionId) => {
+      const editSection = document.getElementById(`edit-${sectionId}`);
+      editSection.style.display = editSection.style.display === 'none' ? 'block' : 'none';
+    };
+
+    const saveEdit = (sectionId) => {
+      const blockListId = `${sectionId}-block-list`;
+      const blockList = document.getElementById(blockListId).value;
+      console.log(`${sectionId} block list saved:`, blockList);
+      // Here you would implement logic to save the block list
+      alert(`${sectionId} settings saved!`);
+    };
+
+    const pomodoroTimer = {
+      workDuration: 25 * 60, // 25 minutes in seconds
+      breakDuration: 5 * 60, // 5 minutes in seconds
+      isRunning: false,
+      timeRemaining: 25 * 60,
+      interval: null,
+
+      init() {
+        this.updateTimerDisplay();
+        this.attachEventListeners();
+        this.updateButtons();
+        this.setupFocusMode();
+      },
+
+      updateTimerDisplay() {
+        const minutes = Math.floor(this.timeRemaining / 60);
+        const seconds = this.timeRemaining % 60;
+        const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('timer').textContent = formattedTime;
+      },
+
+      startTimer() {
+        if (!this.isRunning) {
+          this.isRunning = true;
+          this.interval = setInterval(() => {
+            this.timeRemaining--;
+            this.updateTimerDisplay();
+            if (this.timeRemaining === 0) {
+              this.toggleBreak();
+            }
+          }, 1000);
+        }
+      },
+
+      pauseTimer() {
+        if (this.isRunning) {
+          this.isRunning = false;
+          clearInterval(this.interval);
+        }
+      },
+
+      restartTimer() {
+        this.isRunning = false;
+        clearInterval(this.interval);
+        this.timeRemaining = this.workDuration;
+        this.updateTimerDisplay();
+        this.updateButtons();
+      },
+
+      toggleBreak() {
+        this.timeRemaining = this.timeRemaining === 0 ? this.breakDuration : this.workDuration;
+        // Add notification or sound for break time
+      },
+
+      updateButtons() {
+        const startStopButton = document.getElementById('start-stop');
+        const pauseButton = document.getElementById('pause');
+        const restartButton = document.getElementById('restart');
+
+        if (this.isRunning) {
+          startStopButton.style.display = 'none';
+          pauseButton.style.display = 'inline-block';
+          restartButton.style.display = 'none';
+        } else if (this.timeRemaining < this.workDuration) {
+          startStopButton.textContent = 'Continue';
+          startStopButton.style.display = 'inline-block';
+          pauseButton.style.display = 'none';
+          restartButton.style.display = 'inline-block';
+        } else {
+          startStopButton.textContent = 'Start';
+          startStopButton.style.display = 'inline-block';
+          pauseButton.style.display = 'none';
+          restartButton.style.display = 'none';
+        }
+      },
+
+      attachEventListeners() {
+        document.getElementById('start-stop').addEventListener('click', () => {
+          if (this.isRunning) {
+            this.pauseTimer();
+          } else {
+            this.startTimer();
+          }
+          this.updateButtons();
+        });
+        document.getElementById('pause').addEventListener('click', () => {
+          this.pauseTimer();
+          this.updateButtons();
+        });
+        document.getElementById('restart').addEventListener('click', () => {
+          this.restartTimer();
+        });
+      },
+
+      setupFocusMode() {
+        // Add logic to mute notifications
+        if (Notification.permission !== "granted") {
+          Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+              new Notification("Focus Mode Activated");
+            }
+          });
+        }
+
+        // Show a random inspirational quote
+        showRandomQuote();
+      }
+    };
+
+    pomodoroTimer.init();
+  </script>
+</body>
+</html>

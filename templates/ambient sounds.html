@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producify AI - Ambient Sounds</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1, h2 {
+      color: #ffffff;
+    }
+
+    .sound-options {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .sound-option {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 1rem 2rem;
+      text-align: center;
+      width: 150px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .sound-option:hover {
+      background-color: #2c3e91;
+    }
+
+    iframe {
+      display: none;
+      width: 0;
+      height: 0;
+      border: none;
+    }
+
+    .playing {
+      display: block;
+      margin-top: 2rem;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo"><a href="index.html">Producify AI</a></div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Ambient Sounds</h1>
+    <h2>Select a Sound</h2>
+    <div class="sound-options">
+      <div class="sound-option" data-sound="white-noise">White Noise</div>
+      <div class="sound-option" data-sound="nature">Nature Sounds</div>
+      <div class="sound-option" data-sound="instrumental">Instrumental Music</div>
+    </div>
+    <iframe id="white-noise" src="https://www.youtube.com/embed/nMfPqeZjc2c?autoplay=0&loop=1&playlist=nMfPqeZjc2c" allow="autoplay" frameborder="0"></iframe>
+    <iframe id="nature" src="https://www.youtube.com/embed/eKFTSSKCzWA?autoplay=0&loop=1&playlist=eKFTSSKCzWA" allow="autoplay" frameborder="0"></iframe>
+    <iframe id="instrumental" src="https://www.youtube.com/embed/lBFmdkEZiMQ?autoplay=0&loop=1&playlist=lBFmdkEZiMQ" allow="autoplay" frameborder="0"></iframe>
+    <div id="playing" class="playing" style="display: none;">Now Playing: <span id="current-sound"></span></div>
+  </main>
+
+  <footer>
+    <p>&copy; Producify AI</p>
+  </footer>
+
+  <script>
+    const soundOptions = document.querySelectorAll('.sound-option');
+    const playingDisplay = document.getElementById('playing');
+    const currentSoundDisplay = document.getElementById('current-sound');
+    let currentIframe = null;
+
+    soundOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const sound = option.getAttribute('data-sound');
+        const iframeElement = document.getElementById(sound);
+
+        if (currentIframe && currentIframe !== iframeElement) {
+          currentIframe.src = currentIframe.src.replace("autoplay=1", "autoplay=0"); // Stop current iframe
+          currentIframe.style.display = 'none';
+        }
+
+        if (currentIframe === iframeElement && iframeElement.style.display === 'block') {
+          iframeElement.src = iframeElement.src.replace("autoplay=1", "autoplay=0");
+          iframeElement.style.display = 'none';
+          currentIframe = null;
+          playingDisplay.style.display = 'none';
+        } else {
+          iframeElement.src = iframeElement.src.replace("autoplay=0", "autoplay=1"); // Start iframe
+          iframeElement.style.display = 'block';
+          currentIframe = iframeElement;
+          currentSoundDisplay.textContent = option.textContent;
+          playingDisplay.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

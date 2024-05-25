@@ -3,19 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeepWork AI - Personalized Work Schedule</title>
+  <title>Producify AI - Personalized Work Schedule</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Chatbot styles */
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    header {
+      background-color: #1e1e1e;
+      padding: 1rem;
+    }
+
+    .logo a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 1rem;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      color: #5c6bc0;
+    }
+
     .chatbot-container {
       display: flex;
       flex-direction: column;
       height: 80vh;
       max-width: 800px;
-      margin: 0 auto;
-      border: 1px solid #ccc;
+      margin: 2rem auto;
+      border: 1px solid #333;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       overflow: hidden;
     }
 
@@ -32,17 +68,25 @@
       height: 100%;
       border: none;
     }
+
+    footer {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      text-align: center;
+      color: #ffffff;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
   <header>
     <nav>
-      <div class="logo"><a href="index.html">DeepWork AI</a></div>
+      <div class="logo"><a href="index.html">Producify AI</a></div>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#features">Features</a></li>
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -62,7 +106,7 @@
   </main>
 
   <footer>
-    <p>&copy; DeepWork AI</p>
+    <p>&copy; Producify AI</p>
   </footer>
 </body>
 </html>
