@@ -3,13 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeepWork AI - Pomodoro Timer</title>
+  <title>Producify AI - Pomodoro Timer</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+
     #timer {
       font-size: 3rem;
       font-weight: bold;
-      text-align: center;
       margin-bottom: 1rem;
     }
 
@@ -17,39 +24,83 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
+      margin-top: 1rem;
     }
 
     button {
-      background-color: #3F51B5;
-      color: #fff;
+      color: #ffffff;
       border: none;
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
       cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    #start {
+      background-color: #4CAF50; /* Green */
+    }
+
+    #stop {
+      background-color: #f44336; /* Red */
+    }
+
+    #pause {
+      background-color: #ff9800; /* Orange */
+    }
+
+    #resume {
+      background-color: #3F51B5; /* Blue */
+    }
+
+    #restart {
+      background-color: #3F51B5; /* Blue */
+    }
+
+    button:hover {
+      filter: brightness(1.2);
     }
   </style>
 </head>
 <body>
   <header>
     <nav>
-      <div class="logo"><a href="index.html">DeepWork AI</a></div>
-      <!-- Other navigation links go here -->
+      <div class="logo"><a href="index.html">Producify AI</a></div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
-  <div id="timer">25:00</div>
-  <div id="controls">
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
-  </div>
+  <main>
+    <h1>Pomodoro Timer</h1>
+    <div id="timer">25:00</div>
+    <div id="controls">
+      <button id="start">Start</button>
+      <button id="pause">Pause</button>
+      <button id="resume">Resume</button>
+      <button id="restart">Restart</button>
+      <button id="stop">Stop</button>
+    </div>
+    <div id="continue-prompt" style="display:none;">
+      <p>Do you want to continue?</p>
+      <button id="continue">Continue</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; Producify AI</p>
+  </footer>
 
   <script>
-    // Pomodoro Timer
     const pomodoroTimer = {
       workDuration: 25 * 60, // 25 minutes in seconds
       breakDuration: 5 * 60, // 5 minutes in seconds
       isRunning: false,
-      timeRemaining: null,
+      timeRemaining: 25 * 60,
       interval: null,
 
       init() {
@@ -67,7 +118,6 @@
       startTimer() {
         if (!this.isRunning) {
           this.isRunning = true;
-          this.timeRemaining = this.workDuration;
           this.interval = setInterval(() => {
             this.timeRemaining--;
             this.updateTimerDisplay();
@@ -78,28 +128,56 @@
         }
       },
 
-      stopTimer() {
-        this.isRunning = false;
-        clearInterval(this.interval);
-      },
-
-      toggleBreak() {
-        if (this.timeRemaining === 0) {
-          this.timeRemaining = this.breakDuration;
-          // Add notification or sound for break time
-        } else {
-          this.timeRemaining = this.workDuration;
+      pauseTimer() {
+        if (this.isRunning) {
+          this.isRunning = false;
+          clearInterval(this.interval);
         }
       },
 
-      attachEventListeners() {
-        document.getElementById('start').addEventListener('click', () => {
-          this.startTimer();
-        });
+      resumeTimer() {
+        if (!this.isRunning && this.timeRemaining > 0) {
+          this.isRunning = true;
+          this.interval = setInterval(() => {
+            this.timeRemaining--;
+            this.updateTimerDisplay();
+            if (this.timeRemaining === 0) {
+              this.toggleBreak();
+            }
+          }, 1000);
+        }
+      },
 
-        document.getElementById('stop').addEventListener('click', () => {
-          this.stopTimer();
-        });
+      restartTimer() {
+        this.isRunning = false;
+        clearInterval(this.interval);
+        this.timeRemaining = this.workDuration;
+        this.updateTimerDisplay();
+      },
+
+      stopTimer() {
+        this.isRunning = false;
+        clearInterval(this.interval);
+        document.getElementById('continue-prompt').style.display = 'block';
+      },
+
+      continueTimer() {
+        document.getElementById('continue-prompt').style.display = 'none';
+        this.resumeTimer();
+      },
+
+      toggleBreak() {
+        this.timeRemaining = this.timeRemaining === 0 ? this.breakDuration : this.workDuration;
+        // Add notification or sound for break time
+      },
+
+      attachEventListeners() {
+        document.getElementById('start').addEventListener('click', () => this.startTimer());
+        document.getElementById('pause').addEventListener('click', () => this.pauseTimer());
+        document.getElementById('resume').addEventListener('click', () => this.resumeTimer());
+        document.getElementById('restart').addEventListener('click', () => this.restartTimer());
+        document.getElementById('stop').addEventListener('click', () => this.stopTimer());
+        document.getElementById('continue').addEventListener('click', () => this.continueTimer());
       }
     };
 
