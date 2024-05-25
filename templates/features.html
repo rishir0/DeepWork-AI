@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeepWork AI</title>
+  <title>Producify AI</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
@@ -38,21 +38,55 @@
 
     .close:hover,
     .close:focus {
-      color: black;
+      color: rgb(0, 0, 0);
       text-decoration: none;
       cursor: pointer;
+    }
+
+    /* Feature card styles */
+    body {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    .feature-card {
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .feature-card h3 {
+      color: #ffffff;
+    }
+
+    .feature-card p {
+      color: #ffffff;
+    }
+
+    .feature-card a {
+      display: inline-block;
+      background-color: #5c6bc0;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .feature-card a:hover {
+      background-color: #2c3e91;
     }
   </style>
 </head>
 <body>
   <header>
     <nav>
-      <div class="logo"><a href="index.html">DeepWork AI</a></div>
+      <div class="logo"><a href="index.html">Producify AI</a></div>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="features.html">Features</a></li>
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -60,8 +94,8 @@
   <main>
     <section class="hero">
       <h1>Unlock Your Productivity Potential</h1>
-      <p>DeepWork AI is an AI-powered productivity app that helps you stay focused and achieve your goals.</p>
-      <a href="get started.html">Start Now For Free</a>
+      <p>Producify AI is an AI-powered productivity app that helps you stay focused and achieve your goals.</p>
+      <a href="get started.html" class="btn-primary">Start Now For Free</a>
     </section>
 
     <section class="features">
@@ -69,12 +103,12 @@
       <div class="feature-card">
         <h3>Pomodoro Timer</h3>
         <p>Stay focused and productive with our customizable Pomodoro Timer. Set work and break intervals to suit your needs, and receive notifications to keep you on track.</p>
-        <a href="pomodoro.html">Try Now</a>
+        <a href="pomodoro.html" class="btn-primary">Try Now</a>
       </div>
       <div class="feature-card">
         <h3>Personalized Work Schedule</h3>
         <p>Our AI-powered scheduling system analyzes your tasks, priorities, and work habits to create a personalized work schedule that maximizes your productivity.</p>
-        <a href="Personalized Work Schedule.html">Try Now</a>
+        <a href="personalized-work-schedule.html" class="btn-primary">Try Now</a>
       </div>
     </section>
 
@@ -82,7 +116,7 @@
   </main>
 
   <footer>
-    <p>&copy; DeepWork AI</p>
+    <p>&copy; Producify AI</p>
   </footer>
 
   <!-- Sign-Up Modal -->
@@ -104,7 +138,7 @@
           <a href="#" id="forgot-password">Forgot Password?</a>
         </form>
         <div class="login-link">
-          Already have an account? <a href="#" id="login-link">Login</a>
+          Already have an account? <a href="login.html" id="login-link">Login</a>
         </div>
       </div>
     </div>
