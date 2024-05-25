@@ -37,24 +37,16 @@
       transition: background-color 0.3s ease;
     }
 
-    #start {
+    #start-stop {
       background-color: #4CAF50; /* Green */
     }
 
-    #stop {
+    #pause {
       background-color: #f44336; /* Red */
     }
 
-    #pause {
-      background-color: #ff9800; /* Orange */
-    }
-
-    #resume {
-      background-color: #3F51B5; /* Blue */
-    }
-
     #restart {
-      background-color: #3F51B5; /* Blue */
+      background-color: #ff9800; /* Orange */
     }
 
     button:hover {
@@ -79,15 +71,9 @@
     <h1>Pomodoro Timer</h1>
     <div id="timer">25:00</div>
     <div id="controls">
-      <button id="start">Start</button>
+      <button id="start-stop">Start</button>
       <button id="pause">Pause</button>
-      <button id="resume">Resume</button>
-      <button id="restart">Restart</button>
-      <button id="stop">Stop</button>
-    </div>
-    <div id="continue-prompt" style="display:none;">
-      <p>Do you want to continue?</p>
-      <button id="continue">Continue</button>
+      <button id="restart" style="display: none;">Restart</button>
     </div>
   </main>
 
@@ -106,6 +92,7 @@
       init() {
         this.updateTimerDisplay();
         this.attachEventListeners();
+        this.updateButtons();
       },
 
       updateTimerDisplay() {
@@ -135,35 +122,12 @@
         }
       },
 
-      resumeTimer() {
-        if (!this.isRunning && this.timeRemaining > 0) {
-          this.isRunning = true;
-          this.interval = setInterval(() => {
-            this.timeRemaining--;
-            this.updateTimerDisplay();
-            if (this.timeRemaining === 0) {
-              this.toggleBreak();
-            }
-          }, 1000);
-        }
-      },
-
       restartTimer() {
         this.isRunning = false;
         clearInterval(this.interval);
         this.timeRemaining = this.workDuration;
         this.updateTimerDisplay();
-      },
-
-      stopTimer() {
-        this.isRunning = false;
-        clearInterval(this.interval);
-        document.getElementById('continue-prompt').style.display = 'block';
-      },
-
-      continueTimer() {
-        document.getElementById('continue-prompt').style.display = 'none';
-        this.resumeTimer();
+        this.updateButtons();
       },
 
       toggleBreak() {
@@ -171,13 +135,44 @@
         // Add notification or sound for break time
       },
 
+      updateButtons() {
+        const startStopButton = document.getElementById('start-stop');
+        const pauseButton = document.getElementById('pause');
+        const restartButton = document.getElementById('restart');
+
+        if (this.isRunning) {
+          startStopButton.style.display = 'none';
+          pauseButton.style.display = 'inline-block';
+          restartButton.style.display = 'none';
+        } else if (this.timeRemaining < this.workDuration) {
+          startStopButton.textContent = 'Continue';
+          startStopButton.style.display = 'inline-block';
+          pauseButton.style.display = 'none';
+          restartButton.style.display = 'inline-block';
+        } else {
+          startStopButton.textContent = 'Start';
+          startStopButton.style.display = 'inline-block';
+          pauseButton.style.display = 'none';
+          restartButton.style.display = 'none';
+        }
+      },
+
       attachEventListeners() {
-        document.getElementById('start').addEventListener('click', () => this.startTimer());
-        document.getElementById('pause').addEventListener('click', () => this.pauseTimer());
-        document.getElementById('resume').addEventListener('click', () => this.resumeTimer());
-        document.getElementById('restart').addEventListener('click', () => this.restartTimer());
-        document.getElementById('stop').addEventListener('click', () => this.stopTimer());
-        document.getElementById('continue').addEventListener('click', () => this.continueTimer());
+        document.getElementById('start-stop').addEventListener('click', () => {
+          if (this.isRunning) {
+            this.pauseTimer();
+          } else {
+            this.startTimer();
+          }
+          this.updateButtons();
+        });
+        document.getElementById('pause').addEventListener('click', () => {
+          this.pauseTimer();
+          this.updateButtons();
+        });
+        document.getElementById('restart').addEventListener('click', () => {
+          this.restartTimer();
+        });
       }
     };
 
