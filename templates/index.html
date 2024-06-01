@@ -10,7 +10,9 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID">
   <style>
-    /* Modal styles */
+    /* section {
+      border: 2px solid white;
+    } */
     .modal {
       display: none;
       position: fixed;
@@ -46,38 +48,21 @@
     }
 
     /* University logos styles */
-    #university-logos {
+    .university-logos {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin: 5px 100;
-    }
-
-    #Stanford {
-      transform: scale(0.35);
-    }
-
-    #Austin {
-      transform: scale(1.8);
-    }
-
-    #MIT {
-      transform: scale(0.9);
-    }
-
-    #Rice {
-      transform: scale(1.3);
-    }
-
-    #university-logos img {
-      max-width: 120px;
-      height: auto;
-      object-fit: contain;
-    }
-
-    body {
-      background-color: #121212;
-      color: #ffffff;
+      padding: 60px;
+      
+      img {
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      #Stanford {
+        height: 120px;
+      }
     }
 
     .pricing h2,
@@ -118,7 +103,6 @@
     }
 
     footer {
-      background-color: #121212;
       color: #ffffff;
       text-align: center;
       padding: 20px 0;
@@ -163,14 +147,16 @@
       background-color: #444;
     }
 
-    /* Trusted text styles */
     #trusted-text {
       text-align: center;
       color: #9B9EA3;
-      font-size: 1.125rem;
+      font-size: 2rem;
       line-height: 2rem;
-      margin-top: 80px;
+      margin-top: 50px;
     }
+  .highlight {
+    color: #5c6bc0;
+  }
   </style>
 </head>
 
@@ -186,17 +172,14 @@
       </ul>
     </nav>
   </header>
-
   <main>
     <section class="hero">
-      <h1>Unlock Your Productivity Potential</h1>
-      <p>Producify AI is an AI-powered productivity app that helps you stay focused and achieve your goals.</p>
+      <h1>Unlock Your Productivity<br>Potential</h1>
+      <p>Producify AI is an AI-powered productivity app that helps <br>you stay focused and achieve your goals.</p>
       <a href="get started.html">Start Now For Free</a>
     </section>
-
-    <!-- New section for university logos -->
-    <div id="trusted-text">Trusted by students at 2,000+ colleges</div>
-    <section id="university-logos">
+    <div id="trusted-text">Trusted by students at <span class="highlight">2,000+ colleges</span></div>
+    <section class="university-logos">
       <img id="Austin" src="https://www.turbolearn.ai/_next/static/media/utaustin.70e34597.svg" alt="University of Texas at Austin">
       <img id="Stanford" src="https://www.turbolearn.ai/_next/static/media/yale.315ec777.svg" alt="Yale University">
       <img id="MIT" src="https://www.turbolearn.ai/_next/static/media/mit.4bf8f2f3.svg" alt="MIT">
@@ -251,12 +234,8 @@
       </form>
     </section>
   </main>
-
   <footer>
     <p>&copy; Producify AI</p>
   </footer>
-
-  <script src="app.js"></script>
 </body>
-
 </html>
