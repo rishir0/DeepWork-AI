@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 # Set the directory for storing data
 DATA_DIR = r'/Users/rayhanmohammad/Desktop/rishiravi/C:\Users\draco\OneDrive\Desktop\DeepWork AI\data'
